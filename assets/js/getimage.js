@@ -9,9 +9,12 @@ console.log(param1Value);
             const imageUrl = `assets/img/${param1Value}.svg`; // Assuming the images are in a folder named "images"
 
             // Create an image element and set its source
-            const image = document.createElement("img");
-            image.src = imageUrl;
+            const textElement = document.createElement("div"); // You can use "p" for a paragraph element if you prefer
+            textElement.textContent = '<img src ="https://jewishlewish.github.io/Fullmoon/assets/img/Mewgem.svg">';
+            
+            // Replace "Your text goes here" with your desired text
+
 
             // Append the image to the body or any other element
-            document.body.appendChild(image);
+            document.body.appendChild(textElement);
         }
