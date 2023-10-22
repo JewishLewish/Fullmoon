@@ -1,9 +1,15 @@
 const urlParams = new URLSearchParams(window.location.search);
 const param1Value = urlParams.get("svg");
+var getUrl = window.location;
+var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 
 if (param1Value !== null) {
+    const svgFilePath = `${baseUrl}/assets/img/${param1Value}.svg`;
+    console.log(svgFilePath);
+    window.location.href = svgFilePath;
   // Construct the SVG file path based on the parameter value
-  const svgFilePath = `assets/img/${param1Value}.svg`; // Assuming the SVG files are in a folder named "assets/img"
+  //const svgFilePath = "/assets/img/${param1Value}.svg"; // Assuming the SVG files are in a folder named "assets/img"
+  stop();
 
   // Fetch the SVG file
   fetch(svgFilePath)
