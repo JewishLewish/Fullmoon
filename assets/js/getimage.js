@@ -1,20 +1,27 @@
 const urlParams = new URLSearchParams(window.location.search);
 const param1Value = urlParams.get("svg");
-console.log(param1Value);
 
-        if (param1Value !== null) {
-            console.log("param1: " + param1Value);
+if (param1Value !== null) {
+  // Construct the SVG file path based on the parameter value
+  const svgFilePath = `assets/img/${param1Value}.svg`; // Assuming the SVG files are in a folder named "assets/img"
 
-            // Construct the image URL based on the parameter value
-            const imageUrl = `assets/img/${param1Value}.svg`; // Assuming the images are in a folder named "images"
+  // Fetch the SVG file
+  fetch(svgFilePath)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Failed to fetch SVG file: ${response.status} ${response.statusText}`);
+      }
+      return response.text();
+    })
+    .then(svgContent => {
+      // Create an <svg> element and set its content to the fetched SVG content
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.innerHTML = svgContent;
 
-            // Create an image element and set its source
-            const textElement = document.createElement("div"); // You can use "p" for a paragraph element if you prefer
-            textElement.textContent = '<img src ="https://jewishlewish.github.io/Fullmoon/assets/img/Mewgem.svg">';
-            
-            // Replace "Your text goes here" with your desired text
-
-
-            // Append the image to the body or any other element
-            document.body.appendChild(textElement);
-        }
+      // Append the <svg> element to the body or any other element
+      document.body.appendChild(svg);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
